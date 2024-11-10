@@ -93,14 +93,14 @@ std::string Roster::toString() const {
 }
 
 void Roster::sortByPerm() {
-  for (int i = numStudents - 1; i >= 0; --i) {
+  for (int i = numStudents - 1; i > 0; --i) {
         this->sortByPermHelper(i);
   }
 }
 
 int Roster::indexOfMaxPermAmongFirstKStudents(int k) const {
   int indexOfMaxPerm = 0;
-  for (int i = 1; i <= k; ++i) {  
+  for (int i = 1; i < k; ++i) {  
       if (students[i]->getPerm() > students[indexOfMaxPerm]->getPerm()) 
   	      indexOfMaxPerm = i;
   }
@@ -110,7 +110,7 @@ int Roster::indexOfMaxPermAmongFirstKStudents(int k) const {
 void Roster::sortByPermHelper(int k) {
   int im = indexOfMaxPermAmongFirstKStudents(k);
 
-  Student* temp = students[k];
-  students[k] = students[im];   
+  Student* temp = students[k - 1];
+  students[k - 1] = students[im];   
   students[im] = temp;
 }
